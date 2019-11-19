@@ -14,9 +14,12 @@ int main(int argc, char *argv[]) {
 		//printf("%i\n", errno);
 		//printf("%s\n", strerror(errno));
 		//printf("entered info|%s|\n", name);
-	}else{strcpy(name, argv[1]);}
+		*strchr(name, '\n') = '\0';
+	}else{
+		//printf("%s\n", argv[1]);
+		strcpy(name, argv[1]);
+	}
 	//name[strlen(name)-1] = '\0';
-	*strchr(name, '\n') = '\0';
 	ls_l(name);
 	return 0;
 }
