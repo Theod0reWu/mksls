@@ -73,7 +73,7 @@ int getdsize(char * path){
     if (strcmp(name, ".") != 0 && strcmp(name, "..") != 0){
       if(S_ISDIR(st.st_mode)){
         //printf("%s\n", name);
-        size += getdsize(name);
+        //size += getdsize(name);
       }
       size += st.st_size;
     }
@@ -85,8 +85,9 @@ int getdsize(char * path){
 
 void ls_l(char * path){
   DIR * this_dir = opendir(path);
-  if (this_dir == NULL) {
-    //printf("Could not open the directory: %s \n", path );
+  if (this_dir == NULL || errno) {
+    printf("Could not open the directory: %s \n", path );
+    printf("%s\n", strerror(errno));
     return;
   }
   struct dirent * de = readdir(this_dir);
